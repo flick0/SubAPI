@@ -1,5 +1,6 @@
 import jester
 import db
+import os
 import asyncdispatch
 import redis
 import json
@@ -12,7 +13,10 @@ const TRUSTED = @["00"]
 
 
 proc main() {.async.} =
-  let redisClient = await openAsync()
+  let redisClient = await openAsync(
+    host = os.getEnv("REDISHOST"),
+    port = parseInt(os.getEnv("REDISPORT")).PORT
+    )
 
   func trustedCheck(token: string): bool =
     if token in TRUSTED:
