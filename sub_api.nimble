@@ -12,3 +12,4 @@ bin           = @["sub_api"]
 
 requires "nim >= 1.6.6"
 requires "jester == 0.5.0"
+requires "redis >= 0.2.0"
