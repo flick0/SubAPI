@@ -6,11 +6,10 @@ RUN echo "$PORT"
 ENV REDISHOST=$REDISHOST
 ENV REDISPORT=$REDISPORT
 ENV PORT=$PORT
-
 EXPOSE $PORT
 COPY ./sub_api /sub_api
 RUN chmod +x /sub_api
-RUN /sub_api
+
 
 
 

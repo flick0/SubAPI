@@ -45,10 +45,10 @@ router subroute:
 
 proc main() {.async.} =
     var app = initJester(
-      subroute
- #       settings = newSettings(
- #         port = parseInt(os.getEnv("PORT")).PORT
- #         )
+      subroute,
+         settings = newSettings(
+         port = parseInt(os.getEnv("PORT")).PORT
+        )
     )
     app.serve()
 
