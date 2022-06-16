@@ -2,6 +2,8 @@
 #FROM nimlang/nim:onbuild
 FROM ubuntu
 ENTRYPOINT ["./"]
-RUN chmod +x ./sub_api
-RUN ./sub_api
+RUN ls
+COPY ./sub_api /sub_api
+RUN chmod +x /sub_api
+RUN /sub_api
 
