@@ -28,10 +28,11 @@ router subroute:
     get "/getsub/@sub_id":
         resp "sub : " & @"sub"
 
-    get "/addsub/@payload/@token":
+    get "/addsub/@dat/@token":
         if not trustedCheck(@"token"):
             resp "unauthorized"
-        var push = parseJson(@"payload")
+        echo @"dat"
+        var push = parseJson(@"dat")
         var name = push["name"].getStr()
         var desc = push["desc"].getStr()
         var image = push["image"].getStr()
