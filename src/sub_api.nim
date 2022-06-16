@@ -18,30 +18,27 @@ func trustedCheck(token: string): bool =
     else:
         return false
 
+
 router subroute:
     get "/":
-        resp "Hello, World! "
-
-    get "/getsub":
-        resp "sub"
+        resp "Hlo"
 
     get "/getsub/@sub_id":
-        resp "sub : " & @"sub"
+        resp await dbgetSub(redisClient, @"sub")
 
-    get "/addsub/@dat/@token":
-        if not trustedCheck(@"token"):
-            resp "unauthorized"
-        var dat = @"dat".replace("%7B", "{").replace("%7D", "}")
-        var push = parseJson(dat)
-        var name = push["name"].getStr()
-        var desc = push["desc"].getStr()
-        var image = push["image"].getStr()
-        await postSub(redisClient, name, desc, image)
 
-    delete "/getsub/@sub_id/@token":
-        if not trustedCheck(@"token"):
-            resp "unauthorized"
-        resp "delete sub : " & @"sub"
+    # get "/addsub/@name/@desc/@image/@token":
+    #     if not trustedCheck(@"token"):
+    #         resp "unauthorized"
+    #     var name = @"name"
+    #     var desc = @"desc"
+    #     var image = @"image"
+    #     await postSub(redisClient, name, desc, image)
+
+    # delete "/getsub/@sub_id/@token":
+    #     if not trustedCheck(@"token"):
+    #         resp "unauthorized"
+    #     resp "delete sub : " & @"sub"
 
 
 proc main() {.async.} =

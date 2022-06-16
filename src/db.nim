@@ -1,5 +1,4 @@
 import redis
-import json
 import os
 import strutils
 import asyncdispatch
@@ -10,7 +9,7 @@ proc connectdb*(): Future[AsyncRedis]{.async.} =
     port = parseInt(os.getEnv("REDISPORT")).PORT
     )
 
-proc postSub*(
+proc dbpostSub*(
     redis: AsyncRedis,
     name: string,
     desc: string,
@@ -18,8 +17,8 @@ proc postSub*(
     ) {.async.} =
   await redis.setk("Sub:"&name, "{\"name\":\""&name&"\",\"desc\":\""&desc&"\",\"image\":\""&image&"\"}")
 
-proc getSub*(redis: AsyncRedis, name: string): Future {.async.} =
-  return parseJson(await redis.get("Sub:"&name))
+proc dbgetSub*(redis: AsyncRedis, name: string): Future[string] {.async.} =
+  return await redis.get("Sub:"&name)
 
 
 
