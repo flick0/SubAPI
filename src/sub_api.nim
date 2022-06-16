@@ -28,7 +28,7 @@ router subroute:
     get "/getsub/@sub_id":
         resp "sub : " & @"sub"
 
-    post "/postsub/@token":
+    get "/addsub/@payload/@token":
         if not trustedCheck(@"token"):
             resp "unauthorized"
         var push = parseJson(@"payload")
