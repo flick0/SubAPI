@@ -1,9 +1,11 @@
-# syntax=docker/dockerfile:1
-#FROM nimlang/nim:onbuild
+ARG REDISHOST
+ARG REDISPORT
 FROM ubuntu
+ENV REDISHOST $REDISHOST
+ENV REDISPORT $REDISPORT
 ENTRYPOINT ["./"]
-RUN ls
 COPY ./sub_api /sub_api
-RUN chmod +x /sub_api
+RUN ls
 RUN /sub_api
+
 
