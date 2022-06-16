@@ -31,8 +31,8 @@ router subroute:
     get "/addsub/@dat/@token":
         if not trustedCheck(@"token"):
             resp "unauthorized"
-        echo @"dat"
-        var push = parseJson(@"dat".replace("%7B", "{").replace("%7D", "}"))
+        var dat = @"dat".replace("%7B", "{").replace("%7D", "}")
+        var push = parseJson(dat)
         var name = push["name"].getStr()
         var desc = push["desc"].getStr()
         var image = push["image"].getStr()
